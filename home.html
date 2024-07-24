@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="SagsMan">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STOCK MANAGEMENT SYSTEM</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png">
+    <link rel="stylesheet" href="CSS/bootstrap-5.3.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        .nav-item {
+            padding-right: 10px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: dodgerblue;
+            transition: color 0.3s ease;
+        }
+
+        .form-control::placeholder {
+            color: grey;
+        }
+
+        @media all and (max-width: 500px) {
+            .table th:nth-child(3) {
+                display: none;
+            }
+
+            .table tD:nth-child(3) {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="font-size: 18px">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#" target="_blank" style="font-size: 30px; margin-left: 25px">
+                    <a href="index.html"><img
+                    src="school logo.png" width="80" height="80" alt="loading picture..!"></a>
+                  <a href="index.html"> <img
+                        src="apple-icon.png" width="80" height="80" alt="loading picture..!"></a> FUDMA COMPUTERIZED | <span
+                        class="brand-span" style="color: dodgerblue"> SUPERMARKET I.C SYSTEM</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav" style="flex-direction: row-reverse">
+                    <ul class="navbar-nav">
+                        <li id="btnHome" class="nav-item">
+                            <a class="nav-link active" href="#">Home</a>
+                        </li>
+                        <li id="btnCustomers" class="nav-item">
+                            <a class="nav-link active" href="#">Customers</a>
+                        </li>
+                        <li id="btnItems" class="nav-item">
+                            <a class="nav-link active" href="#">Items</a>
+                        </li>
+                        <li id="btnOrders" class="nav-item">
+                            <a class="nav-link active" href="#">Place Order</a>
+                        </li>
+                        <li id="btnOrderDetails" class="nav-item">
+                            <a class="nav-link active" href="#">Order Details</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section id="home" style="margin-top: 100px">
+            <div class="container-fluid">
+                <h1 class="text-center">Dashboard</h1>
+                <div class="row">
+                    <div class="col-lg-4 mx-auto m-5">
+                        <div class="bg-dark rounded-3 p-4">
+                            <h3 class="text-center mb-4" style="color: dodgerblue">Total Customers</h3>
+                            <h3 id="totalCustomers" class="text-center mb-4">65</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mx-auto m-5">
+                        <div class="bg-dark rounded-3 p-4">
+                            <h3 class="text-center mb-4" style="color: dodgerblue">Total Items</h3>
+                            <h3 id="totalItems" class="text-center mb-4">23</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mx-auto m-5">
+                        <div class="bg-dark rounded-3 p-4">
+                            <h3 class="text-center mb-4" style="color: dodgerblue">Total Orders</h3>
+                            <h3 id="totalOrders" class="text-center mb-4">49</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mx-auto m-5">
+                        <div class="bg-dark rounded-3 p-4">
+                            <h3 class="text-center mb-4" style="color: dodgerblue">Customers Rating</h3>
+                            <h3 id="customersRating" class="text-center mb-4">95%</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bootstrap JS and jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <script>
+            // Function to simulate updating numbers (replace with your actual logic)
+            function updateNumbers() {
+                // Example: Generate random numbers
+                let totalCustomers = Math.floor(Math.random() * 100);
+                let totalItems = Math.floor(Math.random() * 100);
+                let totalOrders = Math.floor(Math.random() * 20);
+                let customersRating = Math.floor(Math.random() * 100) + "%";
+
+                // Update the HTML elements with the new values
+                document.getElementById('totalCustomers').textContent = totalCustomers;
+                document.getElementById('totalItems').textContent = totalItems;
+                document.getElementById('totalOrders').textContent = totalOrders;
+                document.getElementById('customersRating').textContent = customersRating;
+            }
+
+            // Call the updateNumbers function initially
+            updateNumbers();
+
+            // Automatically update every 5 seconds (adjust as needed)
+            setInterval(updateNumbers, 1000); // 5000 milliseconds = 5 seconds
+        </script>
+</body>
+
+</html>
+<section id="customers" style="margin-top: 100px">
+    <div class="container-fluid">
+        <h1 class="text-center">Customer Management</h1>
+        <div class="row">
+            <!-- Table Column -->
+            <div class="col-lg-6 mx-auto mt-5">
+                <div class="bg-dark rounded-3 p-4">
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <input type="search" class="form-control text-white bg-transparent"
+                                placeholder="Enter Customer ID" aria-label="Enter Customer ID"
+                                aria-describedby="basic-addon2" style="border-radius: 5px" id="search-input">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" style="width: 100px; margin-left: 20px;"
+                                    onclick="searchCustomer()">Search
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container mt-5">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <table id="customerTable" class="table table-hover table-bordered table-dark">
+                                    <thead>
+                                        <tr>
+                                            <th>Customer Id</th>
+                                            <th>Customer Name</th>
+                                            <th>Customer Address</th>
+                                            <th>Customer Salary</th>
+                                            <th>Remove</th> <!-- New column for the delete button -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>01</td>
+                                            <td>Bello</td>
+                                            <td>Dutsinma, FUDMA ICT</td>
+                                            <td>₦85,000</td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm deleteBtn">Delete</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>02</td>
+                                            <td>Kamal</td>
+                                            <td>Dutsinma, ICT lab</td>
+                                            <td>₦95,000</td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm deleteBtn">Delete</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>03</td>
+                                            <td>Joel</td>
+                                            <td>Dutsinma, Senate</td>
+                                            <td>₦120,000</td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm deleteBtn">Delete</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>04</td>
+                                            <td>Cynthia</td>
+                                            <td>Dutsinma, Kadangaru</td>
+                                            <td>₦35,000</td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm deleteBtn">Delete</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>05</td>
+                                            <td>Meerah</td>
+                                            <td>Dutsinma, Abuja Road</td>
+                                            <td>₦56,000</td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm deleteBtn">Delete</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        function searchCustomer() {
+                            const searchId = document.getElementById("search-input").value;
+                            const table = document.getElementById("customerTable");
+                            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+                            for (let i = 0; i < rows.length; i++) {
+                                rows[i].classList.remove('table-success');
+                                const cell = rows[i].getElementsByTagName('td')[0];
+                                if (cell && cell.innerText === searchId) {
+                                    rows[i].classList.add('table-success');
+                                }
+                            }
+                        }
+
+                        $(document).ready(function () {
+                            // Delete button click event handler
+                            $('.deleteBtn').click(function () {
+                                // Get the <tr> element (parent of the button)
+                                var row = $(this).closest('tr');
+                                // Get the customer id from the first <td> of the row
+                                var customerId = row.find('td:first').text().trim();
+
+                                // AJAX call to delete.php with customer id
+                                $.ajax({
+                                    url: 'delete.php',
+                                    method: 'POST',
+                                    data: { customerId: customerId },
+                                    success: function (response) {
+                                        // If delete operation is successful, remove the row from table
+                                        row.remove();
+                                        // Optionally, you can update other parts of your UI here
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error('Error deleting customer:', error);
+                                        // Handle error if necessary
+                                    }
+                                });
+                            });
+
+                            // Get All button click event handler
+                            $('.btn-success').click(function () {
+                                const rows = document.querySelectorAll('#customerTable tbody tr');
+                                rows.forEach(row => row.classList.add('table-success'));
+                            });
+                        });
+
+                        $(document).ready(function () {
+                            // Existing code for deleting customers and getting all customers
+                            $('.deleteBtn').click(function () {
+                                var row = $(this).closest('tr');
+                                var customerId = row.find('td:first').text().trim();
+
+                                $.ajax({
+                                    url: 'delete.php',
+                                    method: 'POST',
+                                    data: { customerId: customerId },
+                                    success: function (response) {
+                                        row.remove();
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error('Error deleting customer:', error);
+                                    }
+                                });
+                            });
+
+                            $('.btn-success').click(function () {
+                                const rows = document.querySelectorAll('#customerTable tbody tr');
+                                rows.forEach(row => row.classList.add('table-success'));
+                            });
+
+                            // Save button click event handler
+                            $('.btn-primary').click(function () {
+                                const customerId = $('input[placeholder="Customer ID"]').val();
+                                const customerName = $('input[placeholder="Customer Name"]').val();
+                                const customerAddress = $('input[placeholder="Customer Address"]').val();
+                                const customerSalary = $('input[placeholder="Customer Salary"]').val();
+
+                                if (!customerId || !customerName || !customerAddress || !customerSalary) {
+                                    alert('Please fill in all fields');
+                                    return;
+                                }
+
+                                const table = document.getElementById('customerTable').getElementsByTagName('tbody')[0];
+
+                                // Check if the customer ID already exists
+                                const existingRow = Array.from(table.rows).find(row => row.cells[0].innerText === customerId);
+                                if (existingRow) {
+                                    alert('Customer ID already exists');
+                                    return;
+                                }
+
+                                // Create a new row
+                                const newRow = table.insertRow();
+
+                                // Insert cells
+                                const cell1 = newRow.insertCell(0);
+                                const cell2 = newRow.insertCell(1);
+                                const cell3 = newRow.insertCell(2);
+                                const cell4 = newRow.insertCell(3);
+                                const cell5 = newRow.insertCell(4);
+
+                                // Add data to cells
+                                cell1.innerText = customerId;
+                                cell2.innerText = customerName;
+                                cell3.innerText = customerAddress;
+                                cell4.innerText = customerSalary;
+                                cell5.innerHTML = '<button class="btn btn-danger btn-sm deleteBtn">Delete</button>';
+
+                                // Clear input fields
+                                $('input').val('');
+                            });
+
+                            // Clear button click event handler
+                            $('.btn-danger').click(function () {
+                                // Clear all input fields
+                                $('input').val('');
+                            });
+                        });
+
+
+
+                    </script>
+                    <div class="row justify-content-end mt-4">
+                        <div class="col-auto">
+                            <button class="btn btn-success" style="width: 100px;">Get All</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Column -->
+            <div class="col-lg-4 mx-auto mt-5">
+                <div class="bg-dark rounded-3 p-4">
+                    <h3 class="text-center mb-4" style="color: dodgerblue">Manage Customers</h3>
+
+                    <!-- Inputs -->
+                    <form>
+                        <div class="input-group">
+                            <div class="input-group mx-auto mb-4 mt-4" style="width: 350px">
+                                <input type="text" class="form-control text-white" placeholder="Customer ID"
+                                    aria-label="Customer ID" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                            </div>
+                            <div class="input-group mx-auto mb-4" style="width: 350px">
+                                <input type="text" class="form-control text-white" placeholder="Customer Name"
+                                    aria-label="Customer Name" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                            </div>
+                            <div class="input-group mx-auto mb-4" style="width: 350px">
+                                <input type="text" class="form-control text-white" placeholder="Customer Address"
+                                    aria-label="Customer Address" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                            </div>
+                            <div class="input-group mx-auto mb-4" style="width: 350px">
+                                <input type="text" class="form-control text-white" placeholder="Customer Salary"
+                                    aria-label="Customer Salary" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Buttons -->
+                    <div class="row justify-content-evenly mt-4">
+                        <div class="col-auto">
+                            <button class="btn btn-danger mb-2" style="width: 100px">Clear</button>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary" style="width: 100px">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="items" style="margin-top: 100px">
+    <div class="container-fluid">
+        <h1 class="text-center">Item Management</h1>
+        <div class="row">
+            <!-- Table Column -->
+            <div class="col-lg-6 mx-auto mt-5">
+                <div class="bg-dark rounded-3 p-4">
+                    <div class="row mb-4">
+                        <div class="input-group">
+                            <input type="search" class="form-control text-white bg-transparent"
+                                placeholder="Enter Item Code" aria-label="Enter Item Code"
+                                aria-describedby="basic-addon2" style="border-radius: 5px">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" style="width: 100px; margin-left: 20px;">Search
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <table class="table table-hover table-bordered table-dark">
+                            <thead>
+                                <tr>
+                                    <th>Item Code</th>
+                                    <th>Item Description</th>
+                                    <th>Qty On Hand</th>
+                                    <th>Unit Price</th>
+                                    <th>Remove</th> <!-- New column for the delete button -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>01</td>
+                                    <td>Iphone Xr</td>
+                                    <td>3</td>
+                                    <td>₦850,000</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>02</td>
+                                    <td>Sneekers</td>
+                                    <td>7</td>
+                                    <td>₦33,500</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>03</td>
+                                    <td>Refrigerator</td>
+                                    <td>2</td>
+                                    <td>₦110,000</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>04</td>
+                                    <td>Perfume</td>
+                                    <td>23</td>
+                                    <td>₦40,000</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>05</td>
+                                    <td>Printers</td>
+                                    <td>5</td>
+                                    <td>₦75,000</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row justify-content-end mt-4">
+                        <div class="col-auto">
+                            <button class="btn btn-success" style="width: 100px;">Get All</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Column -->
+            <div class="col-lg-4 mx-auto mt-5">
+                <div class="bg-dark rounded-3 p-4">
+                    <h3 class="text-center mb-4" style="color: dodgerblue">Manage Items</h3>
+
+                    <!-- Inputs -->
+                    <form>
+                        <div class="input-group">
+                            <div class="input-group mx-auto mb-4 mt-4" style="width: 350px">
+                                <input type="text" class="form-control text-white" placeholder="Item Code"
+                                    aria-label="Item Code" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                            </div>
+                            <div class="input-group mx-auto mb-4" style="width: 350px">
+                                <input type="text" class="form-control text-white" placeholder="Item Description"
+                                    aria-label="Item Description" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                            </div>
+                            <div class="input-group mx-auto mb-4" style="width: 350px">
+                                <input type="text" class="form-control text-white" placeholder="Qty On Hand"
+                                    aria-label="Qty On Hand" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                            </div>
+                            <div class="input-group mx-auto mb-4" style="width: 350px">
+                                <input type="text" class="form-control text-white" placeholder="Unit Price"
+                                    aria-label="Unit Price" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Buttons -->
+                    <div class="row justify-content-evenly mt-4">
+                        <div class="col-auto">
+                            <button class="btn btn-danger mb-2" style="width: 100px">Clear</button>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary" style="width: 100px">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        // Delete button click event handler
+        $(document).on('click', '.btn-danger', function () {
+            var row = $(this).closest('tr');
+            var itemCode = row.find('td:first').text().trim();
+
+            // AJAX call to delete.php with item code
+            $.ajax({
+                url: 'delete.php',
+                method: 'POST',
+                data: { itemCode: itemCode },
+                success: function (response) {
+                    // If delete operation is successful, remove the row from table
+                    row.remove();
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error deleting item:', error);
+                }
+            });
+        });
+
+        // Search button click event handler
+        $('.btn-secondary').click(function () {
+            const searchCode = $('input[placeholder="Enter Item Code"]').val().trim();
+            const table = document.querySelector('table');
+            const rows = table.querySelectorAll('tbody tr');
+
+            // Clear previous highlights
+            rows.forEach(row => row.classList.remove('table-success'));
+
+            // Highlight rows that match the search code
+            rows.forEach(row => {
+                const cell = row.querySelector('td:first-child');
+                if (cell && cell.innerText.trim() === searchCode) {
+                    row.classList.add('table-success');
+                }
+            });
+        });
+
+        // Get All button click event handler
+        $('.btn-success').click(function () {
+            const rows = document.querySelectorAll('table tbody tr');
+            rows.forEach(row => row.classList.add('table-success'));
+        });
+
+        // Add button click event handler
+        $('.btn-primary').click(function () {
+            const itemCode = $('input[placeholder="Item Code"]').val().trim();
+            const itemDescription = $('input[placeholder="Item Description"]').val().trim();
+            const qtyOnHand = $('input[placeholder="Qty On Hand"]').val().trim();
+            const unitPrice = $('input[placeholder="Unit Price"]').val().trim();
+
+            if (!itemCode || !itemDescription || !qtyOnHand || !unitPrice) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const table = document.querySelector('table').getElementsByTagName('tbody')[0];
+
+            // Check if the item code already exists
+            const existingRow = Array.from(table.rows).find(row => row.cells[0].innerText.trim() === itemCode);
+            if (existingRow) {
+                alert('Item Code already exists');
+                return;
+            }
+
+            // Create a new row
+            const newRow = table.insertRow();
+
+            // Insert cells
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            const cell3 = newRow.insertCell(2);
+            const cell4 = newRow.insertCell(3);
+            const cell5 = newRow.insertCell(4);
+
+            // Add data to cells
+            cell1.innerText = itemCode;
+            cell2.innerText = itemDescription;
+            cell3.innerText = qtyOnHand;
+            cell4.innerText = unitPrice;
+            cell5.innerHTML = '<button class="btn btn-danger btn-sm">Delete</button>';
+
+            // Clear input fields
+            $('input').val('');
+        });
+
+        // Clear button click event handler
+        $('.btn-danger.mb-2').click(function () {
+            $('input').val('');
+        });
+    });
+</script>
+
+
+<section id="orders" style="margin-top: 100px">
+    <div class="container-fluid">
+        <h1 class="text-center">Place Order</h1>
+        <div class="row">
+
+            <!-- Invoice Details -->
+            <div class="col-lg-4 mx-auto m-5">
+                <div class="bg-dark rounded-3 p-4">
+                    <h3 class="text-center mb-4" style="color: dodgerblue">Invoice Details</h3>
+                    <form id="invoiceForm">
+                        <div class="row">
+                            <div class="input-group mx-auto">
+                                <input type="text" class="form-control text-white m-3 rounded-2" placeholder="Order ID"
+                                    aria-label="Order ID" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                                <input type="text" class="form-control text-white m-3 rounded-2"
+                                    placeholder="Order Date" aria-label="Order Date" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group mx-auto">
+                                <input type="text" class="form-control text-white m-3 rounded-2"
+                                    placeholder="Customer ID" aria-label="Customer ID" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                                <input type="text" class="form-control text-white m-3 rounded-2" placeholder="Name"
+                                    aria-label="Name" aria-describedby="basic-addon2" style="background-color: #3c3c3c">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group mx-auto">
+                                <input type="text" class="form-control text-white m-3 rounded-2" placeholder="Address"
+                                    aria-label="Address" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                                <input type="text" class="form-control text-white m-3 rounded-2" placeholder="Salary"
+                                    aria-label="Salary" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Item Details -->
+            <div class="col-lg-4 mx-auto m-5">
+                <div class="bg-dark rounded-3 p-4">
+                    <h3 class="text-center mb-4" style="color: dodgerblue">Item Details</h3>
+                    <form id="itemForm">
+                        <div class="row">
+                            <div class="input-group mx-auto">
+                                <input type="text" class="form-control text-white m-3 rounded-2" placeholder="Item Code"
+                                    aria-label="Item Code" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c" required>
+                                <input type="text" class="form-control text-white m-3 rounded-2"
+                                    placeholder="Item Description" aria-label="Item Description"
+                                    aria-describedby="basic-addon2" style="background-color: #3c3c3c" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group mx-auto">
+                                <input type="number" class="form-control text-white m-3 rounded-2"
+                                    placeholder="Qty On Hand" aria-label="Qty On Hand" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c" required>
+                                <input type="number" class="form-control text-white m-3 rounded-2"
+                                    placeholder="Unit Price" aria-label="Unit Price" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group mx-auto">
+                                <input type="number" class="form-control text-white m-3 rounded-2"
+                                    placeholder="Buying Qty" aria-label="Buying Qty" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c" required>
+                                <div class="col-auto m-3">
+                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Payment Details -->
+            <div class="col-lg-4 mx-auto m-5">
+                <div class="bg-dark rounded-3 p-4">
+                    <h3 class="text-center mb-4" style="color: dodgerblue">Payment Details</h3>
+                    <form>
+                        <div class="row">
+                            <div class="input-group mx-auto">
+                                <input type="text" class="form-control text-white m-3 rounded-2" placeholder="Total"
+                                    aria-label="Total" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                                <input type="text" class="form-control text-white m-3 rounded-2" placeholder="Discount"
+                                    aria-label="Discount" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group mx-auto">
+                                <input type="text" class="form-control text-white m-3 rounded-2" placeholder="Net Total"
+                                    aria-label="Net Total" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                                <input type="text" class="form-control text-white m-3 rounded-2" placeholder="Cash"
+                                    aria-label="Cash" aria-describedby="basic-addon2" style="background-color: #3c3c3c">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group mx-auto">
+                                <input type="text" class="form-control text-white m-3 rounded-2" placeholder="Balance"
+                                    aria-label="Balance" aria-describedby="basic-addon2"
+                                    style="background-color: #3c3c3c">
+                                <div class="col-auto m-3">
+                                    <button class="btn btn-success">Purchase</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Clear All -->
+            <div class="row text-center">
+                <div class="col mx-auto">
+                    <button class="btn btn-danger" style="width: 200px">Clear All</button>
+                </div>
+            </div>
+
+           
+        </div>
+    </div>
+</section>
+
+
+
+
+<section id="orderDetails" style="margin-top: 100px">
+    <div class="container-fluid">
+        <h1 class="text-center">Order Details Management</h1>
+        <div class="row">
+            <div class="col-lg-12 mx-auto mt-5">
+                <div class="bg-dark rounded-3 p-4">
+                    <div class="col-lg-12">
+                        <table class="table table-hover table-bordered table-dark">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Order Date</th>
+                                    <th>Customer ID</th>
+                                    <th>Item Code</th>
+                                    <th>Ordered Qty</th>
+                                    <th>Total</th>
+                                    <th>Discount</th>
+                                    <th>Net Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orderTableBody">
+                                <tr>
+                                    <td>O001</td>
+                                    <td>2024.07.24</td>
+                                    <td class="customer-id">C001</td>
+                                    <td class="item-code">I001</td>
+                                    <td class="ordered-qty">2</td>
+                                    <td class="total">₦200000</td>
+                                    <td class="discount">₦10</td>
+                                    <td class="net-total">₦180000</td>
+                                </tr>
+                                <tr>
+                                    <td>O002</td>
+                                    <td>2024.07.24</td>
+                                    <td class="customer-id">C002</td>
+                                    <td class="item-code">I002</td>
+                                    <td class="ordered-qty">3</td>
+                                    <td class="total">₦300000</td>
+                                    <td class="discount">₦30</td>
+                                    <td class="net-total">₦200000</td>
+                                </tr>
+                                <tr>
+                                    <td>O003</td>
+                                    <td>2024.07.24</td>
+                                    <td class="customer-id">C003</td>
+                                    <td class="item-code">I003</td>
+                                    <td class="ordered-qty">8</td>
+                                    <td class="total">₦500000</td>
+                                    <td class="discount">₦30</td>
+                                    <td class="net-total">₦900000</td>
+                                </tr>
+                                <tr>
+                                    <td>O004</td>
+                                    <td>2024.07.24</td>
+                                    <td class="customer-id">C004</td>
+                                    <td class="item-code">I004</td>
+                                    <td class="ordered-qty">3</td>
+                                    <td class="total">₦500000</td>
+                                    <td class="discount">₦30</td>
+                                    <td class="net-total">₦900000</td>
+                                </tr>
+                                <tr>
+                                    <td>O005</td>
+                                    <td>2024.07.24</td>
+                                    <td class="customer-id">C005</td>
+                                    <td class="item-code">I005</td>
+                                    <td class="ordered-qty">3</td>
+                                    <td class="total">₦500000</td>
+                                    <td class="discount">₦30</td>
+                                    <td class="net-total">₦900000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function updateTable() {
+        const tableBody = document.getElementById('orderTableBody');
+        const rows = tableBody.getElementsByTagName('tr');
+
+        for (let row of rows) {
+            const customerIdCell = row.querySelector('.customer-id');
+            const itemCodeCell = row.querySelector('.item-code');
+            const orderedQtyCell = row.querySelector('.ordered-qty');
+            const totalCell = row.querySelector('.total');
+            const discountCell = row.querySelector('.discount');
+            const netTotalCell = row.querySelector('.net-total');
+
+            // Generate random values
+            const customerId = `C${getRandomNumber(100, 999)}`;
+            const itemCode = `I${getRandomNumber(100, 999)}`;
+            const orderedQty = getRandomNumber(1, 10);
+            const total = getRandomNumber(100000, 500000);
+            const discount = getRandomNumber(0, 100);
+            const netTotal = total - discount;
+
+            // Update cell values
+            customerIdCell.textContent = customerId;
+            itemCodeCell.textContent = itemCode;
+            orderedQtyCell.textContent = orderedQty;
+            totalCell.textContent = `₦${total}`;
+            discountCell.textContent = `₦${discount}`;
+            netTotalCell.textContent = `₦${netTotal}`;
+        }
+    }
+
+    // Update table values every 3 seconds
+    setInterval(updateTable, 1000);
+</script>
+
+</main>
+
+<script src="JS/jquery-3.7.1.js"></script>
+<script src="CSS/bootstrap-5.3.2/js/bootstrap.bundle.js"></script>
+<script src="JS/navigations.js"></script>
+
+</body>
+
+</html>
